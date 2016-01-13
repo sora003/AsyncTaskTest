@@ -13,17 +13,25 @@ import android.widget.Button;
 public class WelcomeActivity extends AppCompatActivity{
 
     private Button button;
+    private Button button_pg;
     private Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
-        Button button = (Button) findViewById(R.id.button);
+        button = (Button) findViewById(R.id.button);
+        button_pg = (Button) findViewById(R.id.bt_pg);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mContext,MainActivity.class));
+            }
+        });
+        button_pg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext,ProgressBarTest.class));
             }
         });
     }

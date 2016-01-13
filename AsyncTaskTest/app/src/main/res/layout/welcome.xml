@@ -9,4 +9,11 @@
         android:layout_height="wrap_content"
         android:text="@string/getResource"
         android:background="@color/orange"/>
+
+    <Button
+        android:id="@+id/bt_pg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/getProgress"
+        android:background="@color/orange"/>
 </LinearLayout>

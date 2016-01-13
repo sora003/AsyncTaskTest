@@ -2,4 +2,5 @@
     <string name="app_name">AsyncTaskTest</string>
     <string name="action_settings">Settings</string>
     <string name="getResource">获取图片</string>
+    <string name="getProgress">获取进度条</string>
 </resources>
