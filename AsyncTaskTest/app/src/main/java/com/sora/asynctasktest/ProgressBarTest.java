@@ -11,20 +11,35 @@ import android.widget.ProgressBar;
 public class ProgressBarTest extends AppCompatActivity {
 
     private ProgressBar progressBar;
+    MyAsyncTask myAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.progressbar);
         progressBar = (ProgressBar) findViewById(R.id.pg);
-        new MyAsyncTask().execute();
+        myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (myAsyncTask != null && myAsyncTask.getStatus() == AsyncTask.Status.RUNNING){
+            myAsyncTask.cancel(true);
+        }
     }
 
     class MyAsyncTask extends AsyncTask<Void,Integer,Void>{
 
+
         @Override
         protected Void doInBackground(Void... params) {
             for (int i=0;i<100;i++){
+                //监测
+                if (isCancelled()){
+                    break;
+                }
                 publishProgress(i);
                 try {
                     Thread.sleep(300);
@@ -38,6 +53,9 @@ public class ProgressBarTest extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+            if (isCancelled()){
+                return;
+            }
             progressBar.setProgress(values[0]);
         }
     };
